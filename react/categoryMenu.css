@@ -1,0 +1,52 @@
+.itemContainer {
+  max-height: 21.875rem;
+}
+.itemContainer--department {}
+.itemContainer--category {}
+
+.animation {
+  left: -0.5rem;
+}
+
+@media only screen and (max-width: 40rem) {
+  body.sidebarOpen {
+      overflow-y: hidden;
+  }
+}
+
+.container {}
+
+.section--department {}
+.section--category {}
+
+.departmentList {}
+.departmentLink {}
+
+.firstLevelList {}
+.firstLevelLinkContainer {}
+.firstLevelLink {}
+
+.secondLevelList {}
+.secondLevelLinkContainer {}
+.secondLevelLink {}
+
+.submenuList {}
+.submenuItem {}
+
+.sidebarOpen {}
+
+.sidebarScrim {}
+
+.sidebar {}
+
+.sidebarHeader {}
+
+.sidebarContent {}
+
+.sidebarItem {}
+
+.sidebarContainer {}
+
+.menuContainer {}
+
+.sidebarItemContainer {}
