@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { categoryPropType } from '../propTypes'
+import { categoryItemShape } from '../propTypes'
 import classNames from 'classnames'
 import { Container } from 'vtex.store-components'
 
@@ -44,6 +44,7 @@ const ItemContainer = ({
           {departments.map(department => (
             <li key={department.name} className={`${styles.submenuItem} dib`}>
               <Department
+                key={department.name}
                 department={department}
                 parentSlug={parentSlug}
                 menuPosition={menuPosition}
@@ -58,7 +59,7 @@ const ItemContainer = ({
 
 ItemContainer.propTypes = {
   /** Department to be displayed */
-  departments: PropTypes.arrayOf(categoryPropType),
+  departments: PropTypes.arrayOf(categoryItemShape),
   /** Department slug */
   parentSlug: PropTypes.string,
   /** Close menu callback */

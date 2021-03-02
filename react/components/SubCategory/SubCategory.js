@@ -3,13 +3,9 @@ import { Link } from 'vtex.render-runtime'
 
 import PropTypes from 'prop-types'
 import styles from '../../categoryMenu.css'
-import { categoryPropType } from '../../propTypes'
+import { categoryItemShape } from '../../propTypes'
 
-const SubCategory = ({
-  subcategories,
-  parentSlug,
-  secondLevelLinkClasses,
-}) => {
+const SubCategory = ({ subcategories, parentSlug, secondLevelLinkClasses }) => {
   return (
     <>
       {subcategories.children.map(subCategory => {
@@ -44,14 +40,14 @@ const SubCategory = ({
 }
 
 SubCategory.propTypes = {
-  /** Category to be displayed */
-  subcategories: PropTypes.arrayOf(categoryPropType),
-  /** Department slug */
+  /** SubCategories to be displayed */
+  subcategories: PropTypes.object,
+  /** Category slug */
   parentSlug: PropTypes.string,
   /** Hidden Style SubCategory */
   subCategoryStyle: PropTypes.object,
   /** Second Level Classes */
-  secondLevelLinkClasses: PropTypes.object,
+  secondLevelLinkClasses: PropTypes.string,
 }
 
 export default SubCategory

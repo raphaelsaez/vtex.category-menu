@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types'
-import React, { Fragment, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
 import { IconMenu } from 'vtex.store-icons'
-import { useRuntime } from 'vtex.render-runtime'
-import { compose, path } from 'ramda'
+import { compose } from 'ramda'
 import classNames from 'classnames'
 import { Container } from 'vtex.store-components'
 
@@ -36,7 +35,6 @@ const CategoryMenu = ({
   manualDepartments = [],
   strategyTypes,
 }) => {
-  const runtime = useRuntime()
   const [sideBarVisible, setSidebarVisible] = useState(false)
 
   const handleSidebarToggle = () => {
@@ -78,10 +76,6 @@ const CategoryMenu = ({
       </div>
     )
   }
-
-  const pathName = path(['route', 'params', 'department'], runtime)
-
-  const department = pathName ? pathName : ''
 
   const desktopClasses = classNames(
     `${styles.container} w-100 bg-base dn flex-m`,

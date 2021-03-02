@@ -1,9 +1,13 @@
 import React, { useRef, useState } from 'react'
+import { categoryItemShape } from '../../propTypes'
 import styles from '../../categoryMenu.css'
 import Category from '../Category/Category'
 import classNames from 'classnames'
-import categoryMenuPosition from '../../utils/categoryMenuPosition'
+import categoryMenuPosition, {
+  getMenuPositionValues,
+} from '../../utils/categoryMenuPosition'
 import { Link } from 'vtex.render-runtime'
+import PropTypes from 'prop-types'
 
 const Department = ({ department, menuPosition, parentSlug }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -57,12 +61,13 @@ const Department = ({ department, menuPosition, parentSlug }) => {
   }
 
   return (
-    <ul className={columnItemClasses} ref={itemDepartmentRef}>
-      <li
-        className={`${styles.firstLevelLinkContainer} list pa0`}
-        onMouseEnter={() => setDepartmentHover(true)}
-        onMouseLeave={closeDepartmentHandler}
-      >
+    <ul
+      className={columnItemClasses}
+      ref={itemDepartmentRef}
+      onMouseLeave={closeDepartmentHandler}
+      onMouseEnter={() => setDepartmentHover(true)}
+    >
+      <li className={`${styles.firstLevelLinkContainer} list pa0`}>
         <Link
           page={
             parentSlug ? 'store.search#category' : 'store.search#department'
@@ -84,6 +89,7 @@ const Department = ({ department, menuPosition, parentSlug }) => {
             return (
               // eslint-disable-next-line react/jsx-key
               <Category
+                key={category.name}
                 category={category}
                 categoryStyle={categoryStyle}
                 menuPosition={menuPosition}
@@ -95,6 +101,15 @@ const Department = ({ department, menuPosition, parentSlug }) => {
       </ul>
     </ul>
   )
+}
+
+Department.propTypes = {
+  /** Category to be displayed */
+  department: PropTypes.object,
+  /** Department slug */
+  parentSlug: PropTypes.string,
+  /** Defines the position of the category menu */
+  menuPosition: PropTypes.oneOf(getMenuPositionValues()),
 }
 
 export default Department
