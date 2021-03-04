@@ -5,18 +5,12 @@ import classNames from 'classnames'
 import { Link } from 'vtex.render-runtime'
 import PropTypes from 'prop-types'
 
-const Department = ({ department, parentSlug, containerRef }) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [isDepartmentHover, setDepartmentHover] = useState(false)
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const itemDepartmentRef = useRef(null)
-  const closeDepartmentHandler = () => {
-    setDepartmentHover(false)
-  }
-  const containerDivHeightHandler = containerRef => {
-    containerRef.current.style.height = containerRef.current.scrollHeight + 'px'
-  }
+const Department = ({ department, parentSlug, isDepartmentHover }) => {
+  const shouldRenderSecondLevel = department => {
+    const { children } = department
 
+    return children && children.length > 0
+  }
   const getLinkParams = (parentSlug, item) => {
     const params = {
       department: parentSlug || item.slug,
@@ -29,7 +23,7 @@ const Department = ({ department, parentSlug, containerRef }) => {
 
   const columnItemClasses = classNames(
     styles.firstLevelList,
-    'pl0 pr7 flex-row'
+    'pl0 pr2 flex-row fl w-10'
   )
 
   const firstLevelLinkClasses = classNames(
@@ -37,36 +31,15 @@ const Department = ({ department, parentSlug, containerRef }) => {
     'db pv4 link no-underline outline-0 tl t-small truncate c-on-base underline-hover ph5'
   )
 
+  const categoryStyle = {
+    display: isDepartmentHover ? 'flex' : 'none',
+  }
+
   return (
-    <ul
-      className={columnItemClasses}
-      ref={itemDepartmentRef}
-      onMouseLeave={() => {
-        //containerDivHeightHandler(containerRef)
-        closeDepartmentHandler(containerRef)
-      }}
-      onMouseEnter={() => {
-        //containerDivHeightHandler(containerRef)
-        setDepartmentHover(true)
-      }}
-    >
-      <li className={`${styles.firstLevelLinkContainer} list pa0 fl w-15`}>
-        <Link
-          page={
-            parentSlug ? 'store.search#category' : 'store.search#department'
-          }
-          className={firstLevelLinkClasses}
-          params={getLinkParams(parentSlug, department)}
-        >
-          {department.name}
-        </Link>
-      </li>
-      <ul
-        className={'flex-column fl w-25 absolute left-1 top-0'}
-        style={{ left: '12em' }}
-      >
-        {isDepartmentHover ? (
-          department.children.map(category => {
+    <>
+      {isDepartmentHover ? (
+        <ul className={'flex-column relative top-0 fl w-90'}>
+          {department.children.map(category => {
             const params = {
               department: parentSlug || department.slug,
               category: parentSlug ? department.slug : category.slug,
@@ -76,23 +49,23 @@ const Department = ({ department, parentSlug, containerRef }) => {
               <Category
                 key={category.name}
                 category={category}
+                //categoryStyle={categoryStyle}
                 parentSlug={parentSlug}
                 params={params}
               />
             )
-          })
-        ) : (
-          <></>
-        )}
-      </ul>
-    </ul>
+          })}
+        </ul>
+      ) : (
+        <></>
+      )}
+    </>
   )
 }
 
 Department.propTypes = {
   department: PropTypes.object,
   parentSlug: PropTypes.string,
-  containerRef: PropTypes.object,
 }
 
 export default Department
