@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
 import { IconMenu } from 'vtex.store-icons'
@@ -36,9 +36,15 @@ const CategoryMenu = ({
   strategyTypes,
 }) => {
   const [sideBarVisible, setSidebarVisible] = useState(false)
+  const [isHover, setHover] = useState(false)
+  const itemRef = useRef(null)
 
   const handleSidebarToggle = () => {
     setSidebarVisible(prevVisible => !prevVisible)
+  }
+
+  const handleCloseMenu = () => {
+    setHover(!isHover)
   }
 
   const departmentsIds = departments.map(dept => dept.id)
@@ -56,6 +62,13 @@ const CategoryMenu = ({
     case Options.MANUAL:
       visibleDepartments = manualDepartments
       break
+  }
+
+  const containerStyle = {
+    top:
+      itemRef.current &&
+      itemRef.current.offsetTop + itemRef.current.clientHeight,
+    display: isHover ? 'flex' : 'none',
   }
 
   if (mobileMode) {
@@ -78,27 +91,23 @@ const CategoryMenu = ({
   }
 
   const desktopClasses = classNames(
-    `${styles.container} w-100 bg-base dn flex-m`,
-    {
-      'justify-start': menuPosition === categoryMenuPosition.DISPLAY_LEFT.value,
-      'justify-end': menuPosition === categoryMenuPosition.DISPLAY_RIGHT.value,
-      'justify-center':
-        menuPosition === categoryMenuPosition.DISPLAY_CENTER.value,
-    }
+    `${styles.container} w-100 bg-base dn flex-m justify-center`
   )
 
   return (
     <nav className={desktopClasses}>
       <Container
         className={`${styles['section--department']} justify-center flex`}
+        ref={itemRef}
+        onMouseEnter={() => setHover(true)}
       >
         <ul
           className={`${styles.departmentList} pa0 list ma0 flex flex-wrap flex-row t-action overflow-hidden h3`}
+          onClick={handleCloseMenu}
         >
           {showAllDepartments && (
             <CategoryItem
               noRedirect
-              menuPosition={menuPosition}
               subcategoryLevels={
                 DEFAULT_SUBCATEGORIES_LEVELS + showSubcategories
               }
@@ -108,6 +117,8 @@ const CategoryMenu = ({
                   id: 'store/category-menu.departments.title',
                 }),
               }}
+              containerStyle={containerStyle}
+              isHover={isHover}
             />
           )}
         </ul>

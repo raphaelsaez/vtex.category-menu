@@ -1,15 +1,11 @@
 import React, { useRef, useState } from 'react'
-import { categoryItemShape } from '../../propTypes'
 import styles from '../../categoryMenu.css'
 import Category from '../Category/Category'
 import classNames from 'classnames'
-import categoryMenuPosition, {
-  getMenuPositionValues,
-} from '../../utils/categoryMenuPosition'
 import { Link } from 'vtex.render-runtime'
 import PropTypes from 'prop-types'
 
-const Department = ({ department, menuPosition, parentSlug }) => {
+const Department = ({ department, parentSlug }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [isDepartmentHover, setDepartmentHover] = useState(false)
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -32,21 +28,14 @@ const Department = ({ department, menuPosition, parentSlug }) => {
     return params
   }
 
-  const columnItemClasses = classNames(styles.firstLevelList, {
-    'pl0 pr7 flex-row':
-      menuPosition === categoryMenuPosition.DISPLAY_LEFT.value,
-    'pr0 pl7 flex-row':
-      menuPosition === categoryMenuPosition.DISPLAY_RIGHT.value,
-  })
+  const columnItemClasses = classNames(
+    styles.firstLevelList,
+    'pl0 pr7 flex-row'
+  )
 
   const firstLevelLinkClasses = classNames(
     styles.firstLevelLink,
-    'db pv4 link no-underline outline-0 tl t-small truncate c-on-base underline-hover',
-    {
-      pr4: menuPosition === categoryMenuPosition.DISPLAY_LEFT.value,
-      pl4: menuPosition === categoryMenuPosition.DISPLAY_RIGHT.value,
-      ph4: menuPosition === categoryMenuPosition.DISPLAY_CENTER.value,
-    }
+    'db pv4 link no-underline outline-0 tl t-small truncate c-on-base underline-hover ph5'
   )
 
   const categoryStyle = {
@@ -92,7 +81,6 @@ const Department = ({ department, menuPosition, parentSlug }) => {
                 key={category.name}
                 category={category}
                 categoryStyle={categoryStyle}
-                menuPosition={menuPosition}
                 parentSlug={parentSlug}
                 params={params}
               />
@@ -108,8 +96,6 @@ Department.propTypes = {
   department: PropTypes.object,
   /** Department slug */
   parentSlug: PropTypes.string,
-  /** Defines the position of the category menu */
-  menuPosition: PropTypes.oneOf(getMenuPositionValues()),
 }
 
 export default Department

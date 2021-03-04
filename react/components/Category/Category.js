@@ -1,23 +1,14 @@
 import React from 'react'
-import { categoryPropType } from '../../propTypes'
 import styles from '../../categoryMenu.css'
 import SubCategoryContainer from '../SubCategory/SubCategory'
 import { Link } from 'vtex.render-runtime'
 import classNames from 'classnames'
-import categoryMenuPosition, {
-  getMenuPositionValues,
-} from '../../utils/categoryMenuPosition'
 import PropTypes from 'prop-types'
 
-const Category = ({ category, parentSlug, params, menuPosition }) => {
+const Category = ({ category, parentSlug, params }) => {
   const secondLevelLinkClasses = classNames(
     styles.secondLevelLink,
-    'db pv3 no-underline outline-0 tl link t-small truncate c-muted-1 underline-hover',
-    {
-      pr5: menuPosition === categoryMenuPosition.DISPLAY_LEFT.value,
-      pl5: menuPosition === categoryMenuPosition.DISPLAY_RIGHT.value,
-      ph5: menuPosition === categoryMenuPosition.DISPLAY_CENTER.value,
-    }
+    'db pv3 no-underline outline-0 tl link t-small truncate c-muted-1 underline-hover ph5'
   )
 
   return (
@@ -55,8 +46,6 @@ Category.propTypes = {
   parentSlug: PropTypes.string,
   /** Params for slug composition */
   params: PropTypes.object,
-  /** Defines the position of the category menu */
-  menuPosition: PropTypes.oneOf(getMenuPositionValues()),
 }
 
 export default Category

@@ -1,13 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import { categoryItemShape } from '../propTypes'
 import classNames from 'classnames'
 import { Container } from 'vtex.store-components'
 
 import PropTypes from 'prop-types'
 import styles from '../categoryMenu.css'
-import categoryMenuPosition, {
-  getMenuPositionValues,
-} from '../utils/categoryMenuPosition'
 import Department from './Department/Department'
 
 /**
@@ -17,17 +14,10 @@ const ItemContainer = ({
   containerStyle,
   departments,
   parentSlug,
-  menuPosition,
 }) => {
   const containerClasses = classNames(
     styles.submenuList,
-    'w-100 flex flex-wrap pa0 list mw9 flex-column',
-    {
-      'justify-start': menuPosition === categoryMenuPosition.DISPLAY_LEFT.value,
-      'justify-end': menuPosition === categoryMenuPosition.DISPLAY_RIGHT.value,
-      'justify-center':
-        menuPosition === categoryMenuPosition.DISPLAY_CENTER.value,
-    }
+    'w-100 flex flex-wrap pa0 list mw9 flex-column justify-start'
   )
 
   return (
@@ -47,7 +37,6 @@ const ItemContainer = ({
                 key={department.name}
                 department={department}
                 parentSlug={parentSlug}
-                menuPosition={menuPosition}
               />
             </li>
           ))}
@@ -62,12 +51,8 @@ ItemContainer.propTypes = {
   departments: PropTypes.arrayOf(categoryItemShape),
   /** Department slug */
   parentSlug: PropTypes.string,
-  /** Close menu callback */
-  onCloseMenu: PropTypes.func.isRequired,
   /** Whether to show second level links or not */
   showSecondLevel: PropTypes.bool,
-  /** Defines the position of the category menu */
-  menuPosition: PropTypes.oneOf(getMenuPositionValues()),
   /** Custom styles to item container */
   containerStyle: PropTypes.object,
 }
