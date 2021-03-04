@@ -40,13 +40,9 @@ const SubCategory = ({ subcategories, parentSlug, secondLevelLinkClasses }) => {
 }
 
 SubCategory.propTypes = {
-  /** SubCategories to be displayed */
   subcategories: PropTypes.object,
-  /** Category slug */
   parentSlug: PropTypes.string,
-  /** Hidden Style SubCategory */
   subCategoryStyle: PropTypes.object,
-  /** Second Level Classes */
   secondLevelLinkClasses: PropTypes.string,
 }
 

@@ -135,15 +135,10 @@ CategoryMenu.propTypes = {
   }),
   /** Set mobile mode */
   mobileMode: PropTypes.bool,
-  /** Whether to show the departments category or not */
   showAllDepartments: PropTypes.bool,
-  /** Whether to show subcategories or not */
   showSubcategories: PropTypes.bool,
-  /** Defines the position of the category menu */
   menuPosition: PropTypes.oneOf(getMenuPositionValues()),
-  /** Intl */
   intl: intlShape,
-  /** Departments.js to be shown in the desktop mode. */
   departments: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,

@@ -10,11 +10,7 @@ import Department from './Department/Department'
 /**
  * Component responsible dor rendering an array of categories and its respective subcategories
  */
-const ItemContainer = ({
-  containerStyle,
-  departments,
-  parentSlug,
-}) => {
+const ItemContainer = ({ containerStyle, departments, parentSlug }) => {
   const containerClasses = classNames(
     styles.submenuList,
     'w-100 flex flex-wrap pa0 list mw9 flex-column justify-start'
@@ -47,13 +43,9 @@ const ItemContainer = ({
 }
 
 ItemContainer.propTypes = {
-  /** Department to be displayed */
   departments: PropTypes.arrayOf(categoryItemShape),
-  /** Department slug */
   parentSlug: PropTypes.string,
-  /** Whether to show second level links or not */
   showSecondLevel: PropTypes.bool,
-  /** Custom styles to item container */
   containerStyle: PropTypes.object,
 }
 

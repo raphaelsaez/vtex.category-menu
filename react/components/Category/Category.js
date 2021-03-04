@@ -40,11 +40,8 @@ const Category = ({ category, parentSlug, params }) => {
 }
 
 Category.propTypes = {
-  /** Category to be displayed */
   category: PropTypes.object,
-  /** Department slug */
   parentSlug: PropTypes.string,
-  /** Params for slug composition */
   params: PropTypes.object,
 }
 

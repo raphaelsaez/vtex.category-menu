@@ -39,14 +39,7 @@ const Department = ({ department, parentSlug }) => {
   )
 
   const categoryStyle = {
-    top: 0,
-    left:
-      itemDepartmentRef.current &&
-      itemDepartmentRef.current.clientLeft +
-        itemDepartmentRef.current.offsetLeft +
-        100,
     display: isDepartmentHover ? 'flex' : 'none',
-    position: 'relative',
   }
 
   return (
@@ -56,7 +49,7 @@ const Department = ({ department, parentSlug }) => {
       onMouseLeave={closeDepartmentHandler}
       onMouseEnter={() => setDepartmentHover(true)}
     >
-      <li className={`${styles.firstLevelLinkContainer} list pa0`}>
+      <li className={`${styles.firstLevelLinkContainer} list pa0 fl w-15`}>
         <Link
           page={
             parentSlug ? 'store.search#category' : 'store.search#department'
@@ -67,8 +60,11 @@ const Department = ({ department, parentSlug }) => {
           {department.name}
         </Link>
       </li>
-      <ul style={categoryStyle} className={'flex-column'}>
-        {shouldRenderSecondLevel(department) &&
+      <ul
+        //style={categoryStyle}
+        className={'flex-column fl w-25 relative top-0'}
+      >
+        {isDepartmentHover ? (
           department.children.map(category => {
             const params = {
               department: parentSlug || department.slug,
@@ -76,25 +72,25 @@ const Department = ({ department, parentSlug }) => {
             }
             if (parentSlug) params.subcategory = category.slug
             return (
-              // eslint-disable-next-line react/jsx-key
               <Category
                 key={category.name}
                 category={category}
-                categoryStyle={categoryStyle}
+                //categoryStyle={categoryStyle}
                 parentSlug={parentSlug}
                 params={params}
               />
             )
-          })}
+          })
+        ) : (
+          <></>
+        )}
       </ul>
     </ul>
   )
 }
 
 Department.propTypes = {
-  /** Category to be displayed */
   department: PropTypes.object,
-  /** Department slug */
   parentSlug: PropTypes.string,
 }
 

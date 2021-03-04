@@ -59,17 +59,11 @@ const CategoryItem = ({
 }
 
 CategoryItem.propTypes = {
-  /** Department to be displayed */
   department: categoryItemShape.isRequired,
-  /** Set use of Link component */
   noRedirect: PropTypes.bool,
-  /** Number of subcategory levels */
   subcategoryLevels: PropTypes.oneOf([0, 1, 2]),
-  /** Menu category selection */
   isCategorySelected: PropTypes.bool,
-  /** Container Styles */
   containerStyle: PropTypes.object,
-  /** Show or Hide Container */
   isHover: PropTypes.bool,
 }
 
