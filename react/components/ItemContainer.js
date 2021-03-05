@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { categoryItemShape } from '../propTypes'
 import classNames from 'classnames'
 import { Container } from 'vtex.store-components'
@@ -11,6 +11,7 @@ import Department from './Department/Department'
  * Component responsible dor rendering an array of categories and its respective subcategories
  */
 const ItemContainer = ({ containerStyle, departments, parentSlug }) => {
+  const containerRef = useRef(null)
   const containerClasses = classNames(
     styles.submenuList,
     'w-100 flex flex-wrap pa0 list mw9 flex-column justify-start'
@@ -18,9 +19,10 @@ const ItemContainer = ({ containerStyle, departments, parentSlug }) => {
 
   return (
     <div
+      ref={containerRef}
       className={`${styles.itemContainer} ${
         styles['itemContainer--category']
-      } absolute w-100 left-0 bg-base pb2 bw1 bb b--muted-3`}
+      } absolute w-75 left-1 bg-base pb2 bw1 bb b--muted-3 overflow-y-auto`}
       style={containerStyle}
     >
       <Container
@@ -28,13 +30,12 @@ const ItemContainer = ({ containerStyle, departments, parentSlug }) => {
       >
         <ul className={containerClasses}>
           {departments.map(department => (
-            <li key={department.name} className={`${styles.submenuItem} dib`}>
-              <Department
-                key={department.name}
-                department={department}
-                parentSlug={parentSlug}
-              />
-            </li>
+            <Department
+              key={department.name}
+              department={department}
+              parentSlug={parentSlug}
+              containerRef={containerRef}
+            />
           ))}
         </ul>
       </Container>

@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { Link } from 'vtex.render-runtime'
 import PropTypes from 'prop-types'
 
-const Department = ({ department, parentSlug }) => {
+const Department = ({ department, parentSlug, containerRef }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [isDepartmentHover, setDepartmentHover] = useState(false)
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -13,11 +13,10 @@ const Department = ({ department, parentSlug }) => {
   const closeDepartmentHandler = () => {
     setDepartmentHover(false)
   }
-  const shouldRenderSecondLevel = department => {
-    const { children } = department
-
-    return children && children.length > 0
+  const containerDivHeightHandler = containerRef => {
+    containerRef.current.style.height = containerRef.current.scrollHeight + 'px'
   }
+
   const getLinkParams = (parentSlug, item) => {
     const params = {
       department: parentSlug || item.slug,
@@ -38,16 +37,18 @@ const Department = ({ department, parentSlug }) => {
     'db pv4 link no-underline outline-0 tl t-small truncate c-on-base underline-hover ph5'
   )
 
-  const categoryStyle = {
-    display: isDepartmentHover ? 'flex' : 'none',
-  }
-
   return (
     <ul
       className={columnItemClasses}
       ref={itemDepartmentRef}
-      onMouseLeave={closeDepartmentHandler}
-      onMouseEnter={() => setDepartmentHover(true)}
+      onMouseLeave={() => {
+        //containerDivHeightHandler(containerRef)
+        closeDepartmentHandler(containerRef)
+      }}
+      onMouseEnter={() => {
+        //containerDivHeightHandler(containerRef)
+        setDepartmentHover(true)
+      }}
     >
       <li className={`${styles.firstLevelLinkContainer} list pa0 fl w-15`}>
         <Link
@@ -61,8 +62,8 @@ const Department = ({ department, parentSlug }) => {
         </Link>
       </li>
       <ul
-        //style={categoryStyle}
-        className={'flex-column fl w-25 relative top-0'}
+        className={'flex-column fl w-25 absolute left-1 top-0'}
+        style={{ left: '12em' }}
       >
         {isDepartmentHover ? (
           department.children.map(category => {
@@ -75,7 +76,6 @@ const Department = ({ department, parentSlug }) => {
               <Category
                 key={category.name}
                 category={category}
-                //categoryStyle={categoryStyle}
                 parentSlug={parentSlug}
                 params={params}
               />
@@ -92,6 +92,7 @@ const Department = ({ department, parentSlug }) => {
 Department.propTypes = {
   department: PropTypes.object,
   parentSlug: PropTypes.string,
+  containerRef: PropTypes.object,
 }
 
 export default Department
