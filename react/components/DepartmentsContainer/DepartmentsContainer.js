@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { categoryItemShape } from '../../propTypes'
 import classNames from 'classnames'
 import { Container } from 'vtex.store-components'
@@ -63,18 +63,17 @@ const DepartmentsContainer = ({ containerStyle, departments, parentSlug }) => {
             />
           </div>
           {departments.map((department, index) => (
-            <>
+            <Fragment key={department.name}>
               {shouldRenderDepartment(index) &&
                 hasDepartmentChildrenLevel(department) && (
                   <Department
-                    key={department.name}
                     department={department}
                     parentSlug={parentSlug}
                     openDepartmentHandler={openDepartmentHandler}
                     indexDepartment={index}
                   />
                 )}
-            </>
+            </Fragment>
           ))}
         </div>
       </Container>
