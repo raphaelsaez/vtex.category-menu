@@ -6,6 +6,7 @@ import { categoryItemShape } from '../propTypes'
 import DepartmentsContainer from './DepartmentsContainer/DepartmentsContainer'
 import classNames from 'classnames'
 import styles from '../categoryMenu.css'
+import Item from './List/Item/Item'
 
 const MenuContainer = ({
   department,
@@ -22,12 +23,12 @@ const MenuContainer = ({
     'b--action-primary': isHover || isCategorySelected,
   })
 
+  const itemClasses = `${styles.itemContainer}
+    ${styles['itemContainer--department']}
+    flex items-center db list`
+
   return (
-    <li
-      className={`${styles.itemContainer} ${
-        styles['itemContainer--department']
-      } flex items-center db list`}
-    >
+    <Item classes={itemClasses}>
       {noRedirect ? (
         <span className={categoryClasses}>{name}</span>
       ) : (
@@ -46,7 +47,7 @@ const MenuContainer = ({
           parentSlug={department.slug}
         />
       )}
-    </li>
+    </Item>
   )
 }
 

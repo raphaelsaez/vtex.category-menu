@@ -14,6 +14,7 @@ import getCategories from './queries/categoriesQuery.gql'
 import Options from './constants/Options'
 
 import styles from './categoryMenu.css'
+import ListWithClick from './components/List/ListWithClick'
 
 const CategoryMenu = ({
   mobileMode = false,
@@ -83,6 +84,8 @@ const CategoryMenu = ({
     `${styles.container} w-100 bg-base dn flex-m justify-center`
   )
 
+  const listClasses = `${styles.departmentList} pa0 list ma0 flex flex-wrap flex-row t-action overflow-hidden h3`
+
   return (
     <nav className={desktopClasses}>
       <Container
@@ -90,10 +93,7 @@ const CategoryMenu = ({
         ref={itemRef}
         onMouseEnter={() => setHover(true)}
       >
-        <ul
-          className={`${styles.departmentList} pa0 list ma0 flex flex-wrap flex-row t-action overflow-hidden h3`}
-          onClick={handleCloseMenu}
-        >
+        <ListWithClick classes={listClasses} click={handleCloseMenu}>
           <MenuContainer
             noRedirect
             department={{
@@ -105,7 +105,7 @@ const CategoryMenu = ({
             containerStyle={containerStyle}
             isHover={isHover}
           />
-        </ul>
+        </ListWithClick>
       </Container>
     </nav>
   )

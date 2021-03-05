@@ -3,8 +3,10 @@ import { Link } from 'vtex.render-runtime'
 
 import PropTypes from 'prop-types'
 import styles from '../../categoryMenu.css'
+import Item from '../List/Item/Item'
 
 const SubCategory = ({ subcategories, parentSlug, secondLevelLinkClasses }) => {
+  const itemClasses = `${styles.secondLevelLinkContainer} list pa0`
   return (
     <>
       {subcategories.children.map(subCategory => {
@@ -16,10 +18,7 @@ const SubCategory = ({ subcategories, parentSlug, secondLevelLinkClasses }) => {
         if (parentSlug) params.subcategory = subCategory.slug
 
         return (
-          <li
-            key={subCategory.name}
-            className={`${styles.secondLevelLinkContainer} list pa0`}
-          >
+          <Item key={subCategory.name} classes={itemClasses}>
             <Link
               page={
                 parentSlug
@@ -31,7 +30,7 @@ const SubCategory = ({ subcategories, parentSlug, secondLevelLinkClasses }) => {
             >
               {subCategory.name}
             </Link>
-          </li>
+          </Item>
         )
       })}
     </>

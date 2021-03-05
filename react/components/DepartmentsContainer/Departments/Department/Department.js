@@ -2,6 +2,7 @@ import React from 'react'
 import Category from '../../../Category/Category'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import List from '../../../List/List'
 
 const Department = ({
   department,
@@ -20,7 +21,7 @@ const Department = ({
       className={columnsDepartmentClasses}
       onMouseEnter={() => openDepartmentHandler(indexDepartment)}
     >
-      <ul className={columnItemClasses}>
+      <List classes={columnItemClasses}>
         {department.children.map(category => {
           const params = {
             department: parentSlug || department.slug,
@@ -36,7 +37,7 @@ const Department = ({
             />
           )
         })}
-      </ul>
+      </List>
     </div>
   )
 }

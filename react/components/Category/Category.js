@@ -4,6 +4,7 @@ import SubCategoryContainer from '../SubCategory/SubCategory'
 import { Link } from 'vtex.render-runtime'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import Item from '../List/Item/Item'
 
 const Category = ({ category, parentSlug, params }) => {
   const secondLevelLinkClasses = classNames(
@@ -11,12 +12,11 @@ const Category = ({ category, parentSlug, params }) => {
     'db pv3 no-underline outline-0 tl link t-small truncate c-muted-1 underline-hover ph5'
   )
 
+  const itemClasses = `${styles.secondLevelLinkContainer} list pa0`
+
   return (
     <>
-      <li
-        key={category.name}
-        className={`${styles.secondLevelLinkContainer} list pa0`}
-      >
+      <Item key={category.name} classes={itemClasses}>
         <Link
           page={
             parentSlug ? 'store.search#subcategory' : 'store.search#category'
@@ -26,7 +26,7 @@ const Category = ({ category, parentSlug, params }) => {
         >
           <strong>{category.name}</strong>
         </Link>
-      </li>
+      </Item>
       {category.children && (
         <SubCategoryContainer
           subcategories={category}
