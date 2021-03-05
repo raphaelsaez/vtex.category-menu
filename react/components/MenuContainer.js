@@ -15,14 +15,12 @@ const MenuContainer = ({
   containerStyle,
   isHover,
 }) => {
-  const categoryClasses = classNames(
-    styles.departmentLink,
-    'w-100 pv5 no-underline t-small outline-0 db tc link truncate bb bw1 c-muted-1 pointer mh6',
-    {
-      'b--transparent': !isHover && !isCategorySelected,
-      'b--action-primary': isHover || isCategorySelected,
-    }
-  )
+  const menuClasses =
+    'w-100 pv5 no-underline t-small outline-0 db tc link truncate bb bw1 c-muted-1 pointer mh6'
+  const categoryClasses = classNames(styles.departmentLink, menuClasses, {
+    'b--transparent': !isHover && !isCategorySelected,
+    'b--action-primary': isHover || isCategorySelected,
+  })
 
   return (
     <li

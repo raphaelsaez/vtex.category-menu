@@ -15,9 +15,6 @@ import Options from './constants/Options'
 
 import styles from './categoryMenu.css'
 
-/**
- * Component that represents the menu containing the categories of the store
- */
 const CategoryMenu = ({
   mobileMode = false,
   showSubcategories = true,

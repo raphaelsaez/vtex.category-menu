@@ -7,9 +7,7 @@ import styles from '../../categoryMenu.css'
 import Department from './Departments/Department/Department'
 import Departments from './Departments/Departments'
 
-/**
- * Component responsible dor rendering an array of categories and its respective subcategories
- */
+
 const DepartmentsContainer = ({ containerStyle, departments, parentSlug }) => {
   const resetInitialVariable = () => {
     return [...Array(departments.length).fill(false)]
