@@ -3,7 +3,6 @@ import { Link } from 'vtex.render-runtime'
 
 import PropTypes from 'prop-types'
 import styles from '../../categoryMenu.css'
-import { categoryItemShape } from '../../propTypes'
 
 const SubCategory = ({ subcategories, parentSlug, secondLevelLinkClasses }) => {
   return (
@@ -13,7 +12,7 @@ const SubCategory = ({ subcategories, parentSlug, secondLevelLinkClasses }) => {
           department: parentSlug || subcategories.slug,
           category: parentSlug ? subcategories.slug : subCategory.slug,
         }
-        // eslint-disable-next-line react/prop-types
+
         if (parentSlug) params.subcategory = subCategory.slug
 
         return (

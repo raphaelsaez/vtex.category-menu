@@ -7,28 +7,20 @@ import { compose } from 'ramda'
 import classNames from 'classnames'
 import { Container } from 'vtex.store-components'
 
-import CategoryItem from './components/CategoryItem'
+import MenuContainer from './components/MenuContainer'
 import SideBar from './components/SideBar'
 import { categoryPropType } from './propTypes'
 import getCategories from './queries/categoriesQuery.gql'
 import Options from './constants/Options'
 
 import styles from './categoryMenu.css'
-import categoryMenuPosition, {
-  getMenuPositionNames,
-  getMenuPositionValues,
-} from './utils/categoryMenuPosition'
-
-const DEFAULT_SUBCATEGORIES_LEVELS = 1
 
 /**
  * Component that represents the menu containing the categories of the store
  */
 const CategoryMenu = ({
   mobileMode = false,
-  showAllDepartments = true,
   showSubcategories = true,
-  menuPosition = categoryMenuPosition.DISPLAY_CENTER.value,
   departments = [],
   data: { categories = [] },
   intl,
@@ -105,22 +97,17 @@ const CategoryMenu = ({
           className={`${styles.departmentList} pa0 list ma0 flex flex-wrap flex-row t-action overflow-hidden h3`}
           onClick={handleCloseMenu}
         >
-          {showAllDepartments && (
-            <CategoryItem
-              noRedirect
-              subcategoryLevels={
-                DEFAULT_SUBCATEGORIES_LEVELS + showSubcategories
-              }
-              department={{
-                children: visibleDepartments,
-                name: intl.formatMessage({
-                  id: 'store/category-menu.departments.title',
-                }),
-              }}
-              containerStyle={containerStyle}
-              isHover={isHover}
-            />
-          )}
+          <MenuContainer
+            noRedirect
+            department={{
+              children: visibleDepartments,
+              name: intl.formatMessage({
+                id: 'store/category-menu.departments.title',
+              }),
+            }}
+            containerStyle={containerStyle}
+            isHover={isHover}
+          />
         </ul>
       </Container>
     </nav>
@@ -137,7 +124,6 @@ CategoryMenu.propTypes = {
   mobileMode: PropTypes.bool,
   showAllDepartments: PropTypes.bool,
   showSubcategories: PropTypes.bool,
-  menuPosition: PropTypes.oneOf(getMenuPositionValues()),
   intl: intlShape,
   departments: PropTypes.arrayOf(
     PropTypes.shape({
@@ -174,14 +160,6 @@ CategoryMenu.schema = {
       type: 'boolean',
       title: 'admin/editor.category-menu.show-departments-category.title',
       default: true,
-    },
-    menuPosition: {
-      title: 'admin/editor.category-menu.disposition-type.title',
-      type: 'string',
-      enum: getMenuPositionValues(),
-      enumNames: getMenuPositionNames(),
-      default: categoryMenuPosition.DISPLAY_CENTER.value,
-      isLayout: true,
     },
     showSubcategories: {
       type: 'boolean',

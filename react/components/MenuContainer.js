@@ -3,17 +3,12 @@ import { Link } from 'vtex.render-runtime'
 import PropTypes from 'prop-types'
 import { categoryItemShape } from '../propTypes'
 
-import ItemContainer from './ItemContainer'
+import DepartmentsContainer from './DepartmentsContainer/DepartmentsContainer'
 import classNames from 'classnames'
 import styles from '../categoryMenu.css'
 
-/**
- * Component that represents a single category displayed in the menu, also displays
- * the subcategories, if the provided category has them
- */
-const CategoryItem = ({
+const MenuContainer = ({
   department,
-  subcategoryLevels,
   department: { name, slug },
   noRedirect,
   isCategorySelected,
@@ -46,25 +41,23 @@ const CategoryItem = ({
           {name}
         </Link>
       )}
-      {subcategoryLevels > 0 && department.children.length > 0 && (
-        <ItemContainer
+      {department.children.length > 0 && (
+        <DepartmentsContainer
           containerStyle={containerStyle}
           departments={department.children}
           parentSlug={department.slug}
-          showSecondLevel={subcategoryLevels === 2}
         />
       )}
     </li>
   )
 }
 
-CategoryItem.propTypes = {
+MenuContainer.propTypes = {
   department: categoryItemShape.isRequired,
   noRedirect: PropTypes.bool,
-  subcategoryLevels: PropTypes.oneOf([0, 1, 2]),
   isCategorySelected: PropTypes.bool,
   containerStyle: PropTypes.object,
   isHover: PropTypes.bool,
 }
 
-export default CategoryItem
+export default MenuContainer
