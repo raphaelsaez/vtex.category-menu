@@ -41,7 +41,7 @@ const ItemContainer = ({ containerStyle, departments, parentSlug }) => {
 
   const firstLevelLinkClasses = classNames(
     styles.firstLevelLink,
-    'db pv4 link no-underline outline-0 tl t-small truncate c-on-base underline-hover ph5'
+    'db pv4 link no-underline outline-0 tl t-small truncate c-on-base underline-hover ph5 hover-rebel-pink'
   )
 
   const getLinkParams = (parentSlug, item) => {
