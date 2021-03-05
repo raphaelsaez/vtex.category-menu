@@ -71,7 +71,7 @@ const ItemContainer = ({ containerStyle, departments, parentSlug }) => {
               // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
               <div
                 key={index}
-                className={`${styles.firstLevelLinkContainer} list mv3`}
+                className={`${styles.firstLevelLinkContainer} list pa0 grow shadow-hover`}
                 onMouseLeave={closeDepartmentHandler}
                 onMouseEnter={() => openDepartmentHandler(index)}
               >
@@ -93,8 +93,7 @@ const ItemContainer = ({ containerStyle, departments, parentSlug }) => {
             <>
               {shouldRenderCategory(index) && (
                 <div
-                  className={'flex-column relative top-0 fl w-90'}
-                  onMouseLeave={closeDepartmentHandler}
+                  className={'flex-column relative top-0 fl w-90 h-100'}
                   onMouseEnter={() => openDepartmentHandler(index)}
                 >
                   <Department
