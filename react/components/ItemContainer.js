@@ -11,12 +11,21 @@ import Department from './Department/Department'
  * Component responsible dor rendering an array of categories and its respective subcategories
  */
 const ItemContainer = ({ containerStyle, departments, parentSlug }) => {
+  const initialDepartmentState = [...Array(departments.length).fill(false)]
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [isDepartmentHover, setDepartmentHover] = useState(false)
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const itemDepartmentRefs = useRef([])
+  const [isDepartmentHover, setDepartmentHover] = useState(
+    initialDepartmentState
+  )
   const closeDepartmentHandler = () => {
-    setDepartmentHover(false)
+    const isDepartmentHovered = [...Array(departments.length).fill(false)]
+    setDepartmentHover(isDepartmentHovered)
+  }
+
+  const openDepartmentHandler = index => {
+    const isDepartmentHovered = isDepartmentHover.map((_, key) => {
+      return key === index
+    })
+    setDepartmentHover(isDepartmentHovered)
   }
 
   const containerClasses = classNames(
@@ -42,6 +51,9 @@ const ItemContainer = ({ containerStyle, departments, parentSlug }) => {
 
     return params
   }
+  const shouldRenderCategory = index => {
+    return isDepartmentHover[index]
+  }
 
   return (
     <div
@@ -56,12 +68,12 @@ const ItemContainer = ({ containerStyle, departments, parentSlug }) => {
         <div className={containerClasses}>
           <div className={columnItemClasses}>
             {departments.map((department, index) => (
+              // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
               <div
                 key={index}
-                className={`${styles.firstLevelLinkContainer} list pa0`}
-                ref={el => (itemDepartmentRefs.current[index] = el)}
+                className={`${styles.firstLevelLinkContainer} list mv3`}
                 onMouseLeave={closeDepartmentHandler}
-                onMouseEnter={() => setDepartmentHover(true)}
+                onMouseEnter={() => openDepartmentHandler(index)}
               >
                 <Link
                   page={
@@ -77,17 +89,24 @@ const ItemContainer = ({ containerStyle, departments, parentSlug }) => {
               </div>
             ))}
           </div>
-          {console.log(itemDepartmentRefs.current)}
-          <div className={'flex-column relative top-0 fl w-90'}>
-            {departments.map(department => (
-              <Department
-                key={department.name}
-                department={department}
-                parentSlug={parentSlug}
-                isDepartmentHover={isDepartmentHover}
-              />
-            ))}
-          </div>
+          {departments.map((department, index) => (
+            <>
+              {shouldRenderCategory(index) && (
+                <div
+                  className={'flex-column relative top-0 fl w-90'}
+                  onMouseLeave={closeDepartmentHandler}
+                  onMouseEnter={() => openDepartmentHandler(index)}
+                >
+                  <Department
+                    key={department.name}
+                    department={department}
+                    parentSlug={parentSlug}
+                    isDepartmentHover={isDepartmentHover}
+                  />
+                </div>
+              )}
+            </>
+          ))}
         </div>
       </Container>
     </div>
