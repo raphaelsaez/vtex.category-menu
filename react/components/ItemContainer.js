@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { categoryItemShape } from '../propTypes'
 import classNames from 'classnames'
 import { Container } from 'vtex.store-components'
@@ -11,13 +11,15 @@ import Department from './Department/Department'
  * Component responsible dor rendering an array of categories and its respective subcategories
  */
 const ItemContainer = ({ containerStyle, departments, parentSlug }) => {
-  const initialDepartmentState = [...Array(departments.length).fill(false)]
+  const resetInitialVariable = () => {
+    return [...Array(departments.length).fill(false)]
+  }
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [isDepartmentHover, setDepartmentHover] = useState(
-    initialDepartmentState
-  )
+  const [isDepartmentHover, setDepartmentHover] = useState(resetInitialVariable)
+
   const closeDepartmentHandler = () => {
-    const isDepartmentHovered = [...Array(departments.length).fill(false)]
+    const isDepartmentHovered = resetInitialVariable
     setDepartmentHover(isDepartmentHovered)
   }
 
