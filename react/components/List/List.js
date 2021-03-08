@@ -1,9 +1,9 @@
 import React from 'react'
 
-const List = props => {
+const List = ({ classes, children }) => {
   return (
     <>
-      <ul className={props.classes}>{props.children}</ul>
+      <ul className={classes}>{children}</ul>
     </>
   )
 }

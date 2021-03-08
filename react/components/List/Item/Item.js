@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Item = props => {
+const Item = ({ classes, children }) => {
   return (
     <>
-      <li className={props.classes}>{props.children}</li>
+      <li className={classes}>{children}</li>
     </>
   )
 }

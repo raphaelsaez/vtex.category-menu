@@ -1,11 +1,10 @@
 import React from 'react'
 
-const List = props => {
+const List = ({ classes, click, children }) => {
   return (
     <>
-      {/* eslint-disable-next-line react/jsx-handler-names */}
-      <ul onClick={props.click} className={props.classes}>
-        {props.children}
+      <ul onClick={click} className={classes}>
+        {children}
       </ul>
     </>
   )

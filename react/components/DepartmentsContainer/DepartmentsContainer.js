@@ -7,7 +7,6 @@ import styles from '../../categoryMenu.css'
 import Department from './Departments/Department/Department'
 import Departments from './Departments/Departments'
 
-
 const DepartmentsContainer = ({ containerStyle, departments, parentSlug }) => {
   const resetInitialVariable = () => {
     return [...Array(departments.length).fill(false)]
@@ -51,7 +50,7 @@ const DepartmentsContainer = ({ containerStyle, departments, parentSlug }) => {
       <Container
         className={`${styles['section--category']} justify-center w-100 flex`}
       >
-        <div className={containerClasses}>
+        <Container className={containerClasses}>
           <div className={columnDepartmentsClasses}>
             <Departments
               isDepartmentHover={isDepartmentHover}
@@ -73,7 +72,7 @@ const DepartmentsContainer = ({ containerStyle, departments, parentSlug }) => {
                 )}
             </Fragment>
           ))}
-        </div>
+        </Container>
       </Container>
     </div>
   )
