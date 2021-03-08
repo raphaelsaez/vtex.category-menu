@@ -70,13 +70,10 @@ const SideBar = ({
 }
 
 SideBar.propTypes = {
-  /** Sidebar's departments. */
+  title: PropTypes.string,
   departments: PropTypes.arrayOf(PropTypes.object),
-  /** Closes sidebar. */
   onClose: PropTypes.func,
-  /** Sidebar's visibility. */
   visible: PropTypes.bool,
-  /** Whether to show subcategories or not */
   showSubcategories: PropTypes.bool,
 }
 
