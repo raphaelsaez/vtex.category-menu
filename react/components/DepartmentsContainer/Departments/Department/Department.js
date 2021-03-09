@@ -14,30 +14,29 @@ const Department = ({
     'flex-column relative top-0 fl w-80 h-100'
   )
 
-  const columnItemClasses = classNames('flex-column relative top-0 fl')
+  //const columnItemClasses = classNames('flex-column relative top-0 fl')
 
   return (
     <div
       className={columnsDepartmentClasses}
       onMouseEnter={() => openDepartmentHandler(indexDepartment)}
     >
-      <List classes={columnItemClasses}>
-        {department.children.map(category => {
-          const params = {
-            department: parentSlug || department.slug,
-            category: parentSlug ? department.slug : category.slug,
-          }
-          if (parentSlug) params.subcategory = category.slug
-          return (
+      {department.children.map(category => {
+        const params = {
+          department: parentSlug || department.slug,
+          category: parentSlug ? department.slug : category.slug,
+        }
+        if (parentSlug) params.subcategory = category.slug
+        return (
+          <List key={category.name} classes={'pb3'}>
             <Category
-              key={category.name}
               category={category}
               parentSlug={parentSlug}
               params={params}
             />
-          )
-        })}
-      </List>
+          </List>
+        )
+      })}
     </div>
   )
 }

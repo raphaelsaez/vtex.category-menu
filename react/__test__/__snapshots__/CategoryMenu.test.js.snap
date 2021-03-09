@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoryMenu component should match snapshot 1`] = `
+<DocumentFragment>
+  <nav
+    class="container w-100 bg-base dn flex-m justify-center"
+  >
+    <ul
+      class="departmentList pa0 list ma0 flex flex-wrap flex-row t-action overflow-hidden h3"
+    >
+      <li
+        class="itemContainer
+    itemContainer--department
+    flex items-center db list"
+      >
+        <span
+          class="departmentLink w-100 pv5 no-underline t-small outline-0 db tc link truncate bb bw1 c-muted-1 pointer mh6 b--transparent"
+        >
+          Departments
+        </span>
+        <div
+          class="itemContainer itemContainer--category absolute w-100 left-0 bg-base pb2 bw1 bb b--muted-3"
+          style="display: none;"
+        >
+          <div
+            class="firstLevelList pl0 pr2 flex-row fl w-20"
+          >
+            <div
+              class="firstLevelLinkContainer list pa0 grow shadow-hover"
+            >
+              <a
+                class="firstLevelLink db pv4 link no-underline outline-0 tl t-small truncate c-on-base underline-hover ph5 hover-rebel-pink"
+                href="/category-1/s"
+              >
+                Category 1
+              </a>
+            </div>
+            <div
+              class="firstLevelLinkContainer list pa0 grow shadow-hover"
+            >
+              <a
+                class="firstLevelLink db pv4 link no-underline outline-0 tl t-small truncate c-on-base underline-hover ph5 hover-rebel-pink"
+                href="/category-2/s"
+              >
+                Category 2
+              </a>
+            </div>
+            <div
+              class="firstLevelLinkContainer list pa0 grow shadow-hover"
+            >
+              <a
+                class="firstLevelLink db pv4 link no-underline outline-0 tl t-small truncate c-on-base underline-hover ph5 hover-rebel-pink"
+                href="/category-3/s"
+              >
+                Category 3
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</DocumentFragment>
+`;
